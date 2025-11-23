@@ -1,0 +1,13 @@
+{
+  "name": "uem-auth",
+  "version": "1.0.0",
+  "description": "Страница авторизации",
+  "scripts": {
+    "dev": "npx http-server . -p 3000 -o",
+    "start": "npx http-server . -p 3000 -o"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+

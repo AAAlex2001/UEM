@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="tsparticles"></div>
+    <div class="container">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>Добро пожаловать</h1>
+                <p>Войдите в свой аккаунт</p>
+            </div>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username">Имя пользователя</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        placeholder="Введите имя пользователя"
+                        required
+                        autocomplete="username"
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Введите пароль"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+                
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember" name="remember">
+                        <span>Запомнить меня</span>
+                    </label>
+                    <a href="#" class="forgot-password">Забыли пароль?</a>
+                </div>
+                
+                <button type="submit" class="login-button">Войти</button>
+            </form>
+            
+            <div class="login-footer">
+                <p>Нет аккаунта? <a href="#">Зарегистрироваться</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+    <script src="particles-config.js"></script>
+    <script>
+        // Инициализация частиц
+        tsParticles.load("tsparticles", particlesOptions);
+
+        // Обработка формы
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Здесь можно добавить логику авторизации
+            console.log('Логин:', username);
+            console.log('Пароль:', password);
+            
+            // Пример обработки
+            alert('Форма отправлена! (Добавьте свою логику авторизации)');
+        });
+    </script>
+</body>
+</html>
+

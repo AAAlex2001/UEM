@@ -5,8 +5,7 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: #e0e0e0;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -25,9 +24,18 @@ body {
     z-index: 0;
 }
 
+#vanta {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
 .container {
     width: 100%;
-    max-width: 450px;
+    max-width: 350px;
     position: relative;
     z-index: 1;
 }
@@ -38,6 +46,11 @@ body {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     padding: 40px;
     animation: slideUp 0.5s ease-out;
+    border: 2px solid grey;
+}
+
+.login-box:hover {
+    border: 2px solid #4B0082;
 }
 
 @keyframes slideUp {
@@ -58,7 +71,7 @@ body {
 
 .login-header h1 {
     color: #333;
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 600;
     margin-bottom: 8px;
 }
@@ -101,6 +114,11 @@ body {
     box-shadow: 0 0 0 3px rgba(75, 0, 130, 0.1);
 }
 
+.form-group input:hover {
+    border-color: #4B0082;
+    background: white;
+}
+
 .form-group input::placeholder {
     color: #999;
 }
@@ -127,79 +145,25 @@ body {
     accent-color: #4B0082;
 }
 
-.forgot-password {
-    color: #4B0082;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.forgot-password:hover {
-    color: #663399;
-    text-decoration: underline;
-}
-
 .login-button {
     width: 100%;
     padding: 14px;
-    background: #4B0082;
-    color: white;
-    border: none;
+    background: transparent;
+    color: black;
+    border: 1px solid #4B0082;
     border-radius: 10px;
-    font-size: 16px;
+    font-family: inherit;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(75, 0, 130, 0.4);
 }
 
 .login-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(75, 0, 130, 0.5);
     background: #663399;
+    color: white;
 }
 
 .login-button:active {
     transform: translateY(0);
 }
-
-.login-footer {
-    margin-top: 25px;
-    text-align: center;
-    font-size: 14px;
-    color: #666;
-}
-
-.login-footer a {
-    color: #4B0082;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.login-footer a:hover {
-    color: #663399;
-    text-decoration: underline;
-}
-
-/* Адаптивность для мобильных устройств */
-@media (max-width: 480px) {
-    .login-box {
-        padding: 30px 25px;
-    }
-    
-    .login-header h1 {
-        font-size: 24px;
-    }
-    
-    .form-options {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-    
-    .forgot-password {
-        align-self: flex-end;
-    }
-}
-

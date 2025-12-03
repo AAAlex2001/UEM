@@ -78,9 +78,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 30px;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
   border-radius: 15px;
   border: 2px solid #FFB800;
   overflow: hidden;
@@ -88,6 +88,7 @@
   width: 100%;
   height: 100%;
   background: #FFFFFF;
+  transition: box-shadow 0.7s ease, opacity 0.7s ease;
 
   ul {
     display: flex;
@@ -95,15 +96,26 @@
     gap: 5px;
     position: relative;
     z-index: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 
     li {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      width: 100%;
+      gap: 10px;
       font-size: 16px;
       line-height: 20px;
       color: #1A1A1A;
       font-weight: 500;
-      gap: 5px;
 
-        &:hover {
+      svg {
+        flex-shrink: 0;
+      }
+
+      &:hover {
         color: #FF8A00;
         border-color: transparent;
       }
@@ -112,28 +124,28 @@
 }
 
 .industryImage {
-  position: absolute;
-  top: -170px;
-  left: -30px;
-  width: calc(100% + 60px);
-  height: 474px;
+  position: relative;
+  width: 150px;
+  height: 150px;
+  min-width: 150px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
   z-index: 2;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  opacity: 1;
+  flex-shrink: 0;
 }
 
-.industryImage.visible {
-  opacity: 0.2;
-}
-
-:global(.industry-swiper .swiper-slide-active) .industryImage {
-  opacity: 0.2;
-}
 
 :global(.industry-swiper .swiper-slide:not(.swiper-slide-active)) .industry {
   background: #FFFFFF;
-  opacity: 1;
+  opacity: 0.3;
   border: 2px solid #FFB800;
+}
+
+:global(.industry-swiper .swiper-slide-active) .industry {
+  opacity: 1;
+  box-shadow: 0 10px 30px rgba(255, 184, 0, 0.3);
 }
 
 .industryContent {
@@ -142,6 +154,7 @@
   flex-direction: column;
   gap: 8px;
   width: 100%;
+  flex: 1;
 }
 
 .industryHeader {
@@ -170,6 +183,11 @@
 }
 
 @media (min-width: 768px) {
+
+  .industry {
+    flex-direction: row;
+    padding: 30px;
+  }
 
   .section {
   margin-bottom: 200px;
@@ -295,7 +313,7 @@
   .slide {
     width: auto;
     min-width: auto;
-    flex: 0 0 calc((100% - 40px) / 3);
+    flex: 0 0 calc((100% - 40px) / 2);
   }
 
   :global(.industry-swiper .swiper-slide) {
@@ -304,8 +322,12 @@
   }
 
   .industryImage {
-    z-index: 0;
-    opacity: 0.1;
+    width: 180px;
+    height: 180px;
+    min-width: 180px;
+    z-index: 1;
+    opacity: 1;
+    border-radius: 50%;
   }
 
   .industryHeader {
@@ -325,6 +347,10 @@
     &:hover {
       box-shadow: 0 10px 30px rgba(150, 80, 0, 0.4) !important;
     }
+  }
+
+  :global(.industry-swiper .swiper-slide:not(.swiper-slide-active)) .industry {
+    opacity: 1;
   }
 
   :global(.industry-swiper .swiper-slide-active) .industry {

@@ -50,6 +50,7 @@ const industries = [
       "Взрывчатые материалы (Э3.1, Э3.2)",
       "Водоподготовка (Э9)"
     ],
+    photo: "/DPK_4.png",
   },
   {
     id: 5,
@@ -57,6 +58,7 @@ const industries = [
     description: [
       "Грузоподъемные механизмы (Э14.4)"
     ],
+    photo: "/DPK_5.png",
   },
   {
     id: 6,
@@ -64,6 +66,7 @@ const industries = [
     description: [
       "Грузоподъемные механизмы (Э14.4)"
     ],
+    photo: "/DPK_6.png",
   },
 ];
 
@@ -161,7 +164,12 @@ const DPK = () => {
                   {Array.isArray(industry.description) ? (
                     <ul>
                       {industry.description.map((item, index) => (
-                        <li key={index}>{item}</li>
+                        <li key={index}>
+                          {item}
+                          <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.29657 10.0246L1.34546 6.07353L0 7.40951L5.29657 12.7061L16.6667 1.33599L15.3307 0L5.29657 10.0246Z" fill="#1AB580"/>
+                          </svg>
+                        </li>
                       ))}
                     </ul>
                   ) : (

@@ -36,3 +36,4 @@ const MarqueeComponent = () => {
 
 export default MarqueeComponent;
 
+

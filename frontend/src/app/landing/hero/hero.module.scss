@@ -38,57 +38,38 @@
   text-align: center;
 }
 
-/* ===== БЛОК-СХЕМА ===== */
-.flowchart {
+/* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
+.mobileView {
+  display: block;
+}
+
+.wrapper {
   max-width: 1640px;
   margin: 0 auto;
   padding: 0 20px;
   width: 100%;
 }
 
-/* Блок */
-.block {
-  position: relative;
-  background: #fff;
-  border: 2px solid #FFB800;
-  border-radius: 12px;
-  padding: 16px 20px;
-  text-align: center;
-  transition: all 0.3s ease;
-
-  &:hover {
-    box-shadow: 0 8px 25px rgba(255, 184, 0, 0.3);
-  }
-
-  h3 {
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 600;
-    color: #1A1A1A;
-    margin: 0 0 4px;
-  }
-
-  p {
-    font-size: 12px;
-    line-height: 16px;
-    color: #808080;
-    margin: 0;
-  }
+/* Сетка 2x2 */
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: #FFB800;
+  border: 3px solid #FFB800;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
-.blockSmall {
-  background: #fff;
-  border: 2px solid #FFB800;
-  border-radius: 12px;
-  padding: 14px 12px;
+.gridItem {
+  background: #FFF8EE;
+  padding: 16px 14px;
   text-align: center;
-  flex: 1;
-  min-width: 0;
-  transition: all 0.3s ease;
-
-  &:hover {
-    box-shadow: 0 6px 20px rgba(255, 184, 0, 0.25);
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 90px;
+  position: relative;
 
   h3 {
     font-size: 13px;
@@ -100,58 +81,112 @@
 
   p {
     font-size: 11px;
-    line-height: 15px;
+    line-height: 14px;
+    color: #666;
+    margin: 0;
+  }
+}
+
+.gridItemMain {
+  background: #FFF3E0;
+
+  h3 {
+    font-size: 14px;
+    line-height: 18px;
+    color: #FF8A00;
+  }
+}
+
+.gridItemClickable {
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: #FFEDCC;
+  }
+}
+
+.gridItemActive {
+  background: #FFEDCC;
+}
+
+.expandIcon {
+  position: absolute;
+  bottom: 6px;
+  right: 8px;
+  font-size: 10px;
+  color: #FF8A00;
+}
+
+/* Раскрывающийся контент */
+.expandedContent {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.connector {
+  width: 24px;
+  height: 40px;
+  margin: 12px auto;
+}
+
+/* Карточки */
+.card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border: 2px solid #FFB800;
+  border-radius: 14px;
+  padding: 12px 14px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 6px 20px rgba(255, 184, 0, 0.25);
+  }
+}
+
+.cardPhoto {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #FFB800;
+}
+
+.cardInfo {
+  flex: 1;
+
+  h3 {
+    font-size: 15px;
+    line-height: 19px;
+    font-weight: 600;
+    color: #1A1A1A;
+    margin: 0 0 2px;
+  }
+
+  p {
+    font-size: 12px;
+    line-height: 16px;
     color: #808080;
     margin: 0;
   }
 }
 
-.blockCenter {
-  border-color: #FF8A00;
-  border-width: 3px;
-  background: linear-gradient(135deg, #fffbf5 0%, #fff 100%);
-
-  h3 {
-    font-size: 15px;
-  }
-}
-
-.blockProduction {
-  border-color: #FF8A00;
-  border-width: 3px;
-  background: linear-gradient(135deg, #fffbf5 0%, #fff 100%);
-}
-
-/* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
-.mobileView {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-}
-
-.mobileRow {
-  display: flex;
-  gap: 12px;
-  width: 100%;
-  max-width: 340px;
-}
-
-.mobileConnector {
-  width: 220px;
-  height: 40px;
-  margin: 4px 0;
-}
-
-.mobileArrow {
-  width: 24px;
-  height: 40px;
-  margin: 8px 0;
-}
-
-.mobileView .block {
-  width: 100%;
-  max-width: 340px;
+.sectionTitle {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+  color: #1A1A1A;
+  text-align: center;
+  margin: 20px 0 8px;
+  padding: 10px 16px;
+  background: linear-gradient(90deg, transparent 0%, #FFF8EE 50%, transparent 100%);
+  border-radius: 8px;
 }
 
 /* Десктоп скрыт на мобилке */
@@ -183,12 +218,20 @@
   }
 
   .desktopView {
+    display: block;
+  }
+
+  /* Блок-схема */
+  .flowchart {
+    max-width: 1640px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  /* Ряд - на всю ширину */
   .row {
     display: flex;
     align-items: center;
@@ -196,19 +239,33 @@
     width: 100%;
   }
 
-  /* Блоки - равномерно */
   .block {
     flex: 1;
     max-width: 280px;
+    background: #fff;
+    border: 2px solid #FFB800;
+    border-radius: 12px;
     padding: 18px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 8px 25px rgba(255, 184, 0, 0.3);
+    }
 
     h3 {
       font-size: 14px;
       line-height: 18px;
+      font-weight: 600;
+      color: #1A1A1A;
+      margin: 0 0 4px;
     }
 
     p {
       font-size: 12px;
+      line-height: 16px;
+      color: #808080;
+      margin: 0;
     }
   }
 
@@ -216,13 +273,15 @@
   .blockProduction {
     flex: 1.2;
     max-width: 320px;
+    border-color: #FF8A00;
+    border-width: 3px;
+    background: linear-gradient(135deg, #fffbf5 0%, #fff 100%);
 
     h3 {
       font-size: 15px;
     }
   }
 
-  /* Стрелки - заполняют пространство */
   .arrowH {
     flex: 0.5;
     max-width: 100px;
@@ -230,54 +289,10 @@
     height: 24px;
   }
 
-  /* Стрелка вниз от ЦСТ */
   .arrowDown {
     width: 24px;
     height: 60px;
     margin: 16px 0;
-  }
-}
-
-/* ===== DESKTOP 1024+ ===== */
-@media (min-width: 1024px) {
-  .block {
-    max-width: 320px;
-    padding: 22px 28px;
-    border-radius: 16px;
-
-    h3 {
-      font-size: 16px;
-      line-height: 22px;
-    }
-
-    p {
-      font-size: 14px;
-      line-height: 18px;
-    }
-
-    &:hover {
-      box-shadow: 0 10px 30px rgba(150, 80, 0, 0.3);
-      transform: translateY(-2px);
-    }
-  }
-
-  .blockCenter,
-  .blockProduction {
-    max-width: 380px;
-
-    h3 {
-      font-size: 18px;
-    }
-  }
-
-  .arrowH {
-    max-width: 140px;
-    min-width: 80px;
-  }
-
-  .arrowDown {
-    height: 60px;
-    margin: 20px 0;
   }
 }
 

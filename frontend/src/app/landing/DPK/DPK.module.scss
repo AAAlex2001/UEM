@@ -310,10 +310,11 @@
     padding: 0 20px;
   }
 
+  /* 3 колонки = 2 ряда по 3 карточки */
   .slide {
     width: auto;
     min-width: auto;
-    flex: 0 0 calc((100% - 40px) / 2);
+    flex: 0 0 calc((100% - 40px) / 3);
   }
 
   :global(.industry-swiper .swiper-slide) {
@@ -321,10 +322,26 @@
     margin: 0 !important;
   }
 
+  /* Горизонтальная раскладка - картинка слева, контент справа */
+  .industry {
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    gap: 16px;
+    transform: none !important;
+    box-shadow: none;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 10px 30px rgba(150, 80, 0, 0.4) !important;
+      transform: translateY(-4px) !important;
+    }
+  }
+
   .industryImage {
-    width: 180px;
-    height: 180px;
-    min-width: 180px;
+    width: 100px;
+    height: 100px;
+    min-width: 100px;
     z-index: 1;
     opacity: 1;
     border-radius: 50%;
@@ -332,21 +349,26 @@
 
   .industryHeader {
     z-index: 10;
+    margin-bottom: 8px;
+
+    h3 {
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
+
+  .industryContent {
+    align-items: flex-start;
+
+    ul li {
+      font-size: 13px;
+      line-height: 18px;
+    }
   }
 
   .industryContent ul,
   .industryContent p {
     z-index: 0;
-  }
-
-  .industry {
-    transform: none !important;
-    box-shadow: none;
-    transition: box-shadow 0.3s ease;
-
-    &:hover {
-      box-shadow: 0 10px 30px rgba(150, 80, 0, 0.4) !important;
-    }
   }
 
   :global(.industry-swiper .swiper-slide:not(.swiper-slide-active)) .industry {
@@ -356,10 +378,11 @@
   :global(.industry-swiper .swiper-slide-active) .industry {
     transform: none !important;
     box-shadow: none;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 
     &:hover {
       box-shadow: 0 15px 40px rgba(150, 80, 0, 0.5) !important;
+      transform: translateY(-4px) !important;
     }
   }
 }

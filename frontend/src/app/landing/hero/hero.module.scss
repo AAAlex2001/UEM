@@ -1,0 +1,314 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 120px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 1640px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.title {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.titleAccent {
+  color: #FF8A00;
+}
+
+.subtitle {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  margin-bottom: 40px;
+  width: 100%;
+  color: #808080;
+  text-align: center;
+}
+
+/* ===== БЛОК-СХЕМА ===== */
+.flowchart {
+  max-width: 1640px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+/* Блок */
+.block {
+  position: relative;
+  background: #fff;
+  border: 2px solid #FFB800;
+  border-radius: 12px;
+  padding: 16px 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 8px 25px rgba(255, 184, 0, 0.3);
+  }
+
+  h3 {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 600;
+    color: #1A1A1A;
+    margin: 0 0 4px;
+  }
+
+  p {
+    font-size: 12px;
+    line-height: 16px;
+    color: #808080;
+    margin: 0;
+  }
+}
+
+.blockSmall {
+  background: #fff;
+  border: 2px solid #FFB800;
+  border-radius: 12px;
+  padding: 14px 12px;
+  text-align: center;
+  flex: 1;
+  min-width: 0;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 6px 20px rgba(255, 184, 0, 0.25);
+  }
+
+  h3 {
+    font-size: 13px;
+    line-height: 17px;
+    font-weight: 600;
+    color: #1A1A1A;
+    margin: 0 0 4px;
+  }
+
+  p {
+    font-size: 11px;
+    line-height: 15px;
+    color: #808080;
+    margin: 0;
+  }
+}
+
+.blockCenter {
+  border-color: #FF8A00;
+  border-width: 3px;
+  background: linear-gradient(135deg, #fffbf5 0%, #fff 100%);
+
+  h3 {
+    font-size: 15px;
+  }
+}
+
+.blockProduction {
+  border-color: #FF8A00;
+  border-width: 3px;
+  background: linear-gradient(135deg, #fffbf5 0%, #fff 100%);
+}
+
+/* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
+.mobileView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.mobileRow {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 340px;
+}
+
+.mobileConnector {
+  width: 220px;
+  height: 40px;
+  margin: 4px 0;
+}
+
+.mobileArrow {
+  width: 24px;
+  height: 40px;
+  margin: 8px 0;
+}
+
+.mobileView .block {
+  width: 100%;
+  max-width: 340px;
+}
+
+/* Десктоп скрыт на мобилке */
+.desktopView {
+  display: none;
+}
+
+/* ===== TABLET 768+ ===== */
+@media (min-width: 768px) {
+  .section {
+    margin-bottom: 200px;
+  }
+
+  .title {
+    font-size: 24px;
+    line-height: 29px;
+    margin-bottom: 15px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 60px;
+  }
+
+  /* Скрываем мобильную, показываем десктопную */
+  .mobileView {
+    display: none;
+  }
+
+  .desktopView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Ряд - на всю ширину */
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Блоки - равномерно */
+  .block {
+    flex: 1;
+    max-width: 280px;
+    padding: 18px 20px;
+
+    h3 {
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    p {
+      font-size: 12px;
+    }
+  }
+
+  .blockCenter,
+  .blockProduction {
+    flex: 1.2;
+    max-width: 320px;
+
+    h3 {
+      font-size: 15px;
+    }
+  }
+
+  /* Стрелки - заполняют пространство */
+  .arrowH {
+    flex: 0.5;
+    max-width: 100px;
+    min-width: 50px;
+    height: 24px;
+  }
+
+  /* Стрелка вниз от ЦСТ */
+  .arrowDown {
+    width: 24px;
+    height: 60px;
+    margin: 16px 0;
+  }
+}
+
+/* ===== DESKTOP 1024+ ===== */
+@media (min-width: 1024px) {
+  .block {
+    max-width: 320px;
+    padding: 22px 28px;
+    border-radius: 16px;
+
+    h3 {
+      font-size: 16px;
+      line-height: 22px;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    &:hover {
+      box-shadow: 0 10px 30px rgba(150, 80, 0, 0.3);
+      transform: translateY(-2px);
+    }
+  }
+
+  .blockCenter,
+  .blockProduction {
+    max-width: 380px;
+
+    h3 {
+      font-size: 18px;
+    }
+  }
+
+  .arrowH {
+    max-width: 140px;
+    min-width: 80px;
+  }
+
+  .arrowDown {
+    height: 60px;
+    margin: 20px 0;
+  }
+}
+
+/* ===== LARGE DESKTOP 1440+ ===== */
+@media (min-width: 1440px) {
+  .block {
+    max-width: 380px;
+    padding: 28px 36px;
+
+    h3 {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 20px;
+    }
+  }
+
+  .blockCenter,
+  .blockProduction {
+    max-width: 440px;
+
+    h3 {
+      font-size: 20px;
+    }
+  }
+
+  .arrowH {
+    max-width: 180px;
+    min-width: 100px;
+  }
+}

@@ -25,6 +25,9 @@ class TelegramService:
             raise HTTPException(status_code=400, detail="chat_id and text are required")
 
         try:
-            await self.bot.send_message(chat_id=chat_id, text=text, parse_mode=ParseMode.HTML)
+            sent = await self.bot.send_message(chat_id=chat_id, text=text, parse_mode=ParseMode.HTML)
+            message_id = getattr(sent, "message_id", None)
+            sent_date = getattr(sent, "date", None)
+            return {"message_id": message_id, "sent_at": sent_date}
         except Exception as e:
             raise HTTPException(status_code=502, detail=f"Failed to send message via aiogram: {str(e)}")

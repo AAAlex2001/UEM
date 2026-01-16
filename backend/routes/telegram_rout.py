@@ -1,5 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
-from schemas.telegram_schemas import TelegramMessageRequest
+from schemas.telegram_schemas import (
+    TelegramMessageRequest,
+    TelegramMessageResponse,
+    TelegramMessageData,
+    TelegramEnum,
+)
 from services.telegram import TelegramService
 
 router = APIRouter()
@@ -8,11 +13,15 @@ def get_telegram_service() -> TelegramService:
     """Фабрика для создания TelegramService."""
     return TelegramService()
 
-@router.post("/send-message", summary="Отправить сообщение в Телеграм")
+@router.post(
+    "/send-message",
+    summary="Отправить сообщение в Телеграм",
+    response_model=TelegramMessageResponse,
+)
 async def send_telegram_message(
     message_request: TelegramMessageRequest,
     telegram_service: TelegramService = Depends(get_telegram_service),
-) -> dict:
+) -> TelegramMessageResponse:
     """Эндпоинт для отправки сообщения в Телеграм чат.
     """
     try:
@@ -36,11 +45,19 @@ async def send_telegram_message(
         
         text = "\n".join(text_parts)
         
-        await telegram_service.send_message(
+        result = await telegram_service.send_message(
             chat_id=message_request.chat_id,
-            text=text
+            text=text,
         )
-        return {"detail": "Message sent successfully"}
+
+        data = TelegramMessageData(
+            chat_id=message_request.chat_id,
+            status=TelegramEnum.SENT,
+            message_id=result.get("message_id") if isinstance(result, dict) else None,
+            sent_at=result.get("sent_at") if isinstance(result, dict) else None,
+        )
+
+        return TelegramMessageResponse(data=data)
     except HTTPException as e:
         raise e
     except Exception as e:

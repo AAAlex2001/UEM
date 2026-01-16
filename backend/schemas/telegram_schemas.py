@@ -23,3 +23,18 @@ class TelegramMessageRequest(BaseModel):
     group: Optional[str] = Field(None, description="Группа студента.")
     status: TelegramEnum = Field(TelegramEnum.PENDING, description="Статус сообщения.")
     created_at: Optional[datetime] = Field(None, description="Дата и время создания сообщения.")
+
+
+class TelegramMessageData(BaseModel):
+    """Данные, возвращаемые после отправки сообщения в Телеграм."""
+
+    chat_id: int = Field(..., description="Идентификатор чата в Телеграм.")
+    status: TelegramEnum = Field(..., description="Статус отправки сообщения.")
+    message_id: Optional[int] = Field(None, description="ID сообщения в Телеграм, если успешно отправлено.")
+    sent_at: Optional[datetime] = Field(None, description="Время отправки сообщения (UTC).")
+
+
+class TelegramMessageResponse(BaseModel):
+    """Обёртка ответа с полем data."""
+
+    data: TelegramMessageData

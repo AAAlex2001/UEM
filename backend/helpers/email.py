@@ -24,7 +24,6 @@ async def send_student_email(student_code: str, subject: str, body: str) -> None
         subject: Тема письма
         body: Текст письма
     """
-    # Формируем email адрес: {шифр}@pers.spmi.ru
     email = f"{student_code}@pers.spmi.ru"
 
     message = MIMEMultipart()

@@ -14,16 +14,8 @@ async def send_telegram_message(
     telegram_service: TelegramService = Depends(get_telegram_service),
 ) -> dict:
     """Эндпоинт для отправки сообщения в Телеграм чат.
-
-    Args:
-        message_request (TelegramMessageRequest): Данные сообщения.
-        telegram_service (TelegramService): Сервис для отправки сообщений.
-
-    Returns:
-        dict: Результат отправки сообщения.
     """
     try:
-        # Формируем сообщение с данными студента
         text_parts = ["<b>📝 Новая заявка с сайта</b>\n"]
         
         if message_request.name:

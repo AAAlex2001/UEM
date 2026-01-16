@@ -138,7 +138,7 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <h3>Образовательная деятельность</h3>
-              <p>Рабочие программы БПК</p>
+              <p>Образовательный комплекс</p>
             </motion.div>
 
             <div className={styles.arrowH}>
@@ -224,8 +224,7 @@ const Hero = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <h3>ПАО ново-тех</h3>
-              <p>Инженерный отдел</p>А
+              <h3>Планово-технический отдел</h3>
             </motion.div>
           </div>
         </div>

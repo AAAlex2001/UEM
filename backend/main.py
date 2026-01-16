@@ -5,7 +5,8 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routes import  student_email
+from routes import student_email
+from routes import telegram_rout
 
 # Создание приложения FastAPI
 app = FastAPI(
@@ -25,6 +26,7 @@ app.add_middleware(
 
 # Подключение роутеров
 app.include_router(student_email.router)
+app.include_router(telegram_rout.router)
 
 @app.get("/")
 async def root():

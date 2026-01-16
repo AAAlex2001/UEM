@@ -31,11 +31,21 @@ class TelegramService:
                     f"{self.base_url}/sendMessage",
                     json={"chat_id": chat_id, "text": text, "parse_mode": "HTML"}
                 )
-                response.raise_for_status()
-                result = response.json()
-                
+                # Capture response body for debugging
+                raw = response.text
+                status = response.status_code
+
+                if status != 200:
+                    raise HTTPException(status_code=502, detail=f"Telegram API returned {status}: {raw}")
+
+                try:
+                    result = response.json()
+                except ValueError:
+                    raise HTTPException(status_code=502, detail=f"Invalid JSON from Telegram: {raw}")
+
                 if not result.get("ok"):
-                    raise Exception(f"Telegram API error: {result.get('description')}")
+                    desc = result.get("description") or raw
+                    raise HTTPException(status_code=502, detail=f"Telegram API error: {desc}")
                     
         except httpx.HTTPError as e:
             raise HTTPException(status_code=502, detail=f"Failed to send message to Telegram: {str(e)}")

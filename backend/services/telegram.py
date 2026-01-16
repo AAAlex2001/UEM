@@ -4,6 +4,12 @@ from aiogram import Bot
 from aiogram.enums import ParseMode
 
 
+try:
+    chat_id = os.getenv("TELEGRAM_CHAT_ID")
+except Exception as e:
+    chat_id = None
+
+
 class TelegramService:
     """Сервис для отправки данных через телеграм с помощью aiogram."""
 

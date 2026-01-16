@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
+import os
 from schemas.telegram_schemas import (
     TelegramMessageRequest,
     TelegramMessageResponse,
@@ -25,6 +26,14 @@ async def send_telegram_message(
     """Эндпоинт для отправки сообщения в Телеграм чат.
     """
     try:
+        allowed = os.getenv("TELEGRAM_CHAT_ID")
+        if allowed:
+            try:
+                allowed_ids = [int(x.strip()) for x in allowed.split(",") if x.strip()]
+            except ValueError:
+                raise HTTPException(status_code=500, detail="Invalid TELEGRAM_CHAT_ID format in env")
+            if message_request.chat_id not in allowed_ids:
+                raise HTTPException(status_code=403, detail="chat_id not allowed")
         text_parts = ["<b>📝 Новая заявка с сайта</b>\n"]
         
         if message_request.name:

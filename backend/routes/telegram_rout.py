@@ -46,6 +46,8 @@ async def send_telegram_message(
             text_parts.append(f"<b>Телефон:</b> {message_request.phone}")
         if message_request.group:
             text_parts.append(f"<b>Группа:</b> {message_request.group}")
+        if message_request.profession:
+            text_parts.append(f"<b>На кого запись:</b> {message_request.profession}")
         
         text_parts.append(f"\n<b>Статус:</b> {message_request.status.value}")
         
@@ -64,6 +66,7 @@ async def send_telegram_message(
             status=TelegramEnum.SENT,
             message_id=result.get("message_id") if isinstance(result, dict) else None,
             sent_at=result.get("sent_at") if isinstance(result, dict) else None,
+            profession=message_request.profession,
         )
 
         return TelegramMessageResponse(data=data)

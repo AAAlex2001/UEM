@@ -18,6 +18,9 @@ class TelegramBase:
     phone: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     status: Mapped[str] = mapped_column(String(50), default="pending")
+    message_id: Mapped[Optional[int]] = mapped_column(nullable=True)
+    profession: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+
 
 
 class TelegramCreate(TelegramBase):

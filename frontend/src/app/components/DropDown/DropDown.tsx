@@ -7,14 +7,17 @@ type DropDownProps = {
     onSelect?: (profession: string, index?: number) => void;
     selectedIndex?: number | null;
     placeholder?: string;
+    disabled?: boolean;
 };
 
-export const DropDown: React.FC<DropDownProps> = ({ professions, onSelect, selectedIndex = null, placeholder = "Выберите опцию" }) => {
+export const DropDown: React.FC<DropDownProps> = ({ professions, onSelect, selectedIndex = null, placeholder = "Выберите опцию", disabled = false }) => {
 
     const [open, setOpen] = useState(false);
 
     const toggleOpen = () => {
-        setOpen(!open);
+        if (!disabled) {
+            setOpen(!open);
+        }
     };
 
     const label = (typeof selectedIndex === 'number' && professions && professions[selectedIndex])
@@ -24,10 +27,11 @@ export const DropDown: React.FC<DropDownProps> = ({ professions, onSelect, selec
     return (
        <div className={styles.dropDown}>
         <button
-          className={styles.dropDownButton}
+          className={`${styles.dropDownButton} ${disabled ? styles.disabled : ''}`}
           onClick={toggleOpen}
           aria-expanded={open}
           type="button"
+          disabled={disabled}
         >
           {label}
         </button>

@@ -16,6 +16,7 @@ const EntryForm: React.FC = () => {
         error,
         loading,
         professions,
+        selectedProfession,
         setName,
         setEmail,
         setPhone,
@@ -67,7 +68,12 @@ const EntryForm: React.FC = () => {
                     <div className={styles.formRow}>
                         <div style={{ flex: 1 }}>
                             <label className={styles.label}>Профессия</label>
-                            <DropDown professions={professions} onSelect={handleSelect} selectedIndex={typeof professionId === 'number' ? professionId : null} />
+                            <DropDown 
+                                professions={professions} 
+                                onSelect={handleSelect} 
+                                selectedIndex={typeof professionId === 'number' ? professionId : null} 
+                                disabled={selectedProfession !== null}
+                            />
                         </div>
                     </div>
 

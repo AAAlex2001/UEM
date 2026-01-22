@@ -1,0 +1,244 @@
+.professionPage {
+    min-height: 100vh;
+    background: #ffffff;
+    padding: 40px 20px 60px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.backButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #FFB800;
+    border: none;
+    color: #1a1a1a;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 40px;
+    text-decoration: none;
+
+    &:hover {
+        background: #FF8A00;
+        color: white;
+        transform: translateX(-4px);
+    }
+}
+
+.content {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.header {
+    margin-bottom: 32px;
+    text-align: center;
+    padding: 24px;
+    background: linear-gradient(135deg, #FFF8EE 0%, #FFF3E0 100%);
+    border-radius: 16px;
+    border: 3px solid #FFB800;
+
+    h1 {
+        font-size: 42px;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 12px;
+        line-height: 1.2;
+    }
+
+    .subtitle {
+        font-size: 18px;
+        color: #FF8A00;
+        font-weight: 600;
+        line-height: 1.6;
+    }
+}
+
+.description {
+    margin-bottom: 40px;
+    padding: 28px;
+    background: #FFF8EE;
+    border-radius: 16px;
+    border: 2px solid #FFB800;
+
+    h2 {
+        font-size: 24px;
+        font-weight: 600;
+        color: #FF8A00;
+        margin-bottom: 16px;
+    }
+
+    p {
+        font-size: 17px;
+        color: #333;
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+
+    .functionsList {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        li {
+            padding-left: 28px;
+            position: relative;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+
+            &:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 8px;
+                width: 16px;
+                height: 16px;
+                background: url('data:image/svg+xml,<svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.29657 10.0246L1.34546 6.07353L0 7.40951L5.29657 12.7061L16.6667 1.33599L15.3307 0L5.29657 10.0246Z" fill="%231AB580"/></svg>') no-repeat center;
+                background-size: contain;
+            }
+        }
+    }
+}
+
+.imagesGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.imageBlock {
+    background: white;
+    border-radius: 16px;
+    border: 2px solid #FFB800;
+    overflow: hidden;
+
+    h2 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #1a1a1a;
+        padding: 16px 20px;
+        background: #FFF8EE;
+        border-bottom: 2px solid #FFB800;
+        margin: 0;
+    }
+
+    .imageContent {
+        padding: 16px;
+    }
+}
+
+.mainImageWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.rpSection {
+    margin-bottom: 40px;
+    padding: 32px;
+    background: linear-gradient(135deg, #FFF3E0 0%, #FFE6CC 100%);
+    border-radius: 16px;
+    border: 3px solid #FFB800;
+    text-align: center;
+
+    h2 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #FF8A00;
+        margin-bottom: 8px;
+    }
+
+    p {
+        font-size: 18px;
+        color: #666;
+    }
+}
+
+.formSection {
+    background: #FFF8EE;
+    border-radius: 16px;
+    padding: 32px;
+    border: 2px solid #FFB800;
+
+    h2 {
+        font-size: 28px;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 24px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .professionPage {
+        padding: 60px 16px 40px;
+    }
+
+    .content {
+        padding: 24px 16px;
+    }
+
+    .header {
+        padding: 20px;
+
+        h1 {
+            font-size: 28px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+        }
+    }
+
+    .imagesGrid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .description {
+        padding: 20px;
+
+        h2 {
+            font-size: 20px;
+        }
+
+        p {
+            font-size: 15px;
+        }
+    }
+
+    .rpSection {
+        padding: 24px;
+
+        h2 {
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 16px;
+        }
+    }
+
+    .formSection {
+        padding: 24px 16px;
+
+        h2 {
+            font-size: 22px;
+        }
+    }
+}

@@ -12,7 +12,6 @@ export default function LandingPage() {
         <main className={styles.main}>
           <Hero />
           <DPK />
-          <EntryForm />
         </main>
           <MarqueeComponent />
       </div>

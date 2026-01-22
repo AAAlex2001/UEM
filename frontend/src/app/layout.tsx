@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import { ProfessionProvider } from "./context/ProfessionContext";
 
 const montserrat = Montserrat({
   subsets: ["latin", "cyrillic"],
@@ -20,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={`${montserrat.className} antialiased`}>{children}</body>
+      <body className={`${montserrat.className} antialiased`}>
+        <ProfessionProvider>{children}</ProfessionProvider>
+      </body>
     </html>
   );
 }

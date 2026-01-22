@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import styles from "./DPK.module.scss";
 import Image from "next/image";
+import Link from "next/link";
 
 const industries = [
   {
@@ -17,7 +18,8 @@ const industries = [
       "Изготовление сложных сварных конструкций из деталей и заготовок с использованием \n" +
       "различных методов сварки в зависимости от материалов и типов соединений"
     ],
-      photo: "/DPK_1.png",
+    photo: "/DPK_1.png",
+    professionSlug: "svarshik",
   },
   {
     id: 2,
@@ -29,7 +31,8 @@ const industries = [
       "в основные производственные цеха;",
       "Рубка и лазерная резка листового материала"
     ],
-      photo: "/DPK_2.png",
+    photo: "/DPK_2.png",
+    professionSlug: "slesar",
   },
   {
     id: 3,
@@ -39,7 +42,8 @@ const industries = [
       "Выполнение доводочных и притирочных работ;",
       "Разметка и  подготовка деталей к сварке"
     ],
-      photo: "/DPK_3.png",
+    photo: "/DPK_3.png",
+    professionSlug: "slesar",
   },
   {
     id: 4,
@@ -49,6 +53,7 @@ const industries = [
       "заготовок, деталей и изделий из различных материалов"
     ],
     photo: "/DPK_4.png",
+    professionSlug: "tokar",
   },
   {
     id: 5,
@@ -60,6 +65,7 @@ const industries = [
       "художественные изделия"
     ],
     photo: "/DPK_5.png",
+    professionSlug: "plotnik",
   },
   {
     id: 6,
@@ -71,6 +77,7 @@ const industries = [
       "гравере"
     ],
     photo: "/DPK_6.png",
+    professionSlug: "montazhnik",
   },
   {
     id: 7,
@@ -81,6 +88,7 @@ const industries = [
       "Полировка изделий"
     ],
     photo: "/DPK_6.png",
+    professionSlug: "emalyer",
   },
   {
     id: 8,
@@ -93,6 +101,7 @@ const industries = [
       "Различные виды мозаики из камня"
     ],
     photo: "/DPK_6.png",
+    professionSlug: "kamnerez",
   },
   {
     id: 9,
@@ -104,6 +113,7 @@ const industries = [
       "Художественное чернение ювелирных изделий"
     ],
     photo: "/DPK_6.png",
+    professionSlug: "malyar",
   },
   {
     id: 10,
@@ -114,6 +124,7 @@ const industries = [
       "Экспертиза ювелирных изделий, драгоценных камней и предметов антиквариата"
     ],
     photo: "/DPK_6.png",
+    professionSlug: "kamnerez",
   },
   {
     id: 11,
@@ -126,6 +137,7 @@ const industries = [
       "Финишная обработка изделия после эмалирования"
     ],
     photo: "/DPK_6.png",
+    professionSlug: "emalyer",
   },
   {
     id: 12,
@@ -135,6 +147,7 @@ const industries = [
       "Изготовление шлифов, аншлифов и ППШ"
     ],
     photo: "/DPK_6.png",
+    professionSlug: "kamnerez",
   },
   {
     id: 13,
@@ -144,6 +157,7 @@ const industries = [
       "Сборка, монтаж и демонтаж  узлов, механизмов и устройств"
     ],
     photo: "/DPK_6.png",
+    professionSlug: "elektromonter",
   },
 ];
 
@@ -228,32 +242,50 @@ const DPK = () => {
         >
           {industries.map((industry) => (
             <SwiperSlide key={industry.id} className={styles.slide}>
-              <article className={styles.industry}>
-                {industry.photo && (
-                  <div className={styles.industryImage}>
-                    <Image src={industry.photo} alt={industry.title} fill style={{ objectFit: "cover", objectPosition: "top" }} />
-                  </div>
-                )}
-                <div className={styles.industryContent}>
-                  <div className={styles.industryHeader}>
-                    <h3>{industry.title}</h3>
-                  </div>
-                  {Array.isArray(industry.description) ? (
-                    <ul>
-                      {industry.description.map((item, index) => (
-                        <li key={index}>
-                          {item}
-                          <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.29657 10.0246L1.34546 6.07353L0 7.40951L5.29657 12.7061L16.6667 1.33599L15.3307 0L5.29657 10.0246Z" fill="#1AB580"/>
-                          </svg>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p>{industry.description}</p>
+              {industry.professionSlug ? (
+                <Link href={`/profession/${industry.professionSlug}`} className={styles.industryLink}>
+                  <article className={styles.industry}>
+                    {industry.photo && (
+                      <div className={styles.industryImage}>
+                        <Image src={industry.photo} alt={industry.title} fill style={{ objectFit: "cover", objectPosition: "top" }} />
+                      </div>
+                    )}
+                    <div className={styles.industryContent}>
+                      <div className={styles.industryHeader}>
+                        <h3>{industry.title}</h3>
+                      </div>
+                      <div className={styles.learnMoreBadge}>Узнать подробнее →</div>
+                    </div>
+                  </article>
+                </Link>
+              ) : (
+                <article className={styles.industry}>
+                  {industry.photo && (
+                    <div className={styles.industryImage}>
+                      <Image src={industry.photo} alt={industry.title} fill style={{ objectFit: "cover", objectPosition: "top" }} />
+                    </div>
                   )}
-                </div>
-              </article>
+                  <div className={styles.industryContent}>
+                    <div className={styles.industryHeader}>
+                      <h3>{industry.title}</h3>
+                    </div>
+                    {Array.isArray(industry.description) ? (
+                      <ul>
+                        {industry.description.map((item, index) => (
+                          <li key={index}>
+                            {item}
+                            <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M5.29657 10.0246L1.34546 6.07353L0 7.40951L5.29657 12.7061L16.6667 1.33599L15.3307 0L5.29657 10.0246Z" fill="#1AB580"/>
+                            </svg>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>{industry.description}</p>
+                    )}
+                  </div>
+                </article>
+              )}
             </SwiperSlide>
           ))}
         </Swiper>

@@ -74,6 +74,14 @@
   display: flex;
 }
 
+.industryLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .industry {
   position: relative;
   display: flex;
@@ -88,7 +96,13 @@
   width: 100%;
   height: 100%;
   background: #FFFFFF;
-  transition: box-shadow 0.7s ease, opacity 0.7s ease;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(255, 184, 0, 0.4);
+    border-color: #FF8A00;
+  }
 
   ul {
     display: flex;
@@ -114,12 +128,24 @@
       svg {
         flex-shrink: 0;
       }
-
-      &:hover {
-        color: #FF8A00;
-        border-color: transparent;
-      }
     }
+  }
+}
+
+.learnMoreBadge {
+  margin-top: 12px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #FFB800 0%, #FF8A00 100%);
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  transition: all 0.3s ease;
+
+  .industryLink:hover & {
+    background: linear-gradient(135deg, #FF8A00 0%, #FFB800 100%);
+    transform: scale(1.05);
   }
 }
 
@@ -155,6 +181,7 @@
   gap: 8px;
   width: 100%;
   flex: 1;
+  justify-content: space-between;
 }
 
 .industryHeader {

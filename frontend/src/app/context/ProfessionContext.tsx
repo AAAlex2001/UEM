@@ -1,0 +1,272 @@
+"use client";
+
+import React, { createContext, useContext, useState, ReactNode } from "react";
+
+export interface Profession {
+    id: number;
+    name: string;
+    slug: string;
+    description: string;
+    mainImage: string;
+    workImages: string[];
+    workplace: string;
+    functions: string[];
+}
+
+export const professions: Profession[] = [
+    {
+        id: 0,
+        name: "Эмальер",
+        slug: "emalyer",
+        description: "Эмальер занимается нанесением эмали на металлические изделия, создавая защитное и декоративное покрытие.",
+        mainImage: "/DPK_6.png",
+        workImages: [
+            "/org_1.png",
+            "/org_2.png",
+            "/org_3.png",
+        ],
+        workplace: "ЭМАЛЬЕРНЫЙ УЧАСТОК",
+        functions: [
+            "Подготовка изделия к декоративным покрытиям",
+            "Нанесения эмалей в различных техниках",
+            "Сушка и обжиг эмалей",
+            "Роспись эмалевыми красками",
+            "Финишная обработка изделия после эмалирования"
+        ],
+    },
+    {
+        id: 1,
+        name: "Слесарь",
+        slug: "slesar",
+        description: "Слесарь выполняет механическую обработку, сборку и ремонт металлических изделий и механизмов.",
+        mainImage: "/DPK_3.png",
+        workImages: [
+            "/org_1.png",
+            "/org_2.png",
+            "/org_3.png",
+        ],
+        workplace: "СЛЕСАРНЫЙ УЧАСТОК",
+        functions: [
+            "Сборка функционально законченных изделий, стендов, макетов и узлов",
+            "Выполнение доводочных и притирочных работ",
+            "Разметка и подготовка деталей к сварке"
+        ],
+    },
+    {
+        id: 2,
+        name: "Камнерез",
+        slug: "kamnerez",
+        description: "Камнерез занимается обработкой и резкой натурального и искусственного камня для различных целей.",
+        mainImage: "/DPK_6.png",
+        workImages: [
+            "/org_1.png",
+            "/org_4.png",
+            "/org_5.png",
+        ],
+        workplace: "КАМНЕРЕЗНЫЙ УЧАСТОК",
+        functions: [
+            "Изготовления предметов интерьера",
+            "Художественная резьба по камню, флористика, анималистка, блокированная скульптура",
+            "Инкрустация",
+            "Различные виды мозаики из камня"
+        ],
+    },
+    {
+        id: 3,
+        name: "Сварщик",
+        slug: "svarshik",
+        description: "Сварщик соединяет металлические детали с помощью различных видов сварки.",
+        mainImage: "/DPK_1.png",
+        workImages: [
+            "/org_1.png",
+            "/org_2.png",
+            "/org_3.png",
+        ],
+        workplace: "КУЗНЕЧНО-СВАРОЧНЫЙ УЧАСТОК",
+        functions: [
+            "Изготовление и реставрация изделий",
+            "Изготовление сложных сварных конструкций из деталей и заготовок с использованием различных методов сварки в зависимости от материалов и типов соединений"
+        ],
+    },
+    {
+        id: 4,
+        name: "Токарь",
+        slug: "tokar",
+        description: "Токарь обрабатывает детали на токарных станках, создавая изделия с высокой точностью.",
+        mainImage: "/DPK_4.png",
+        workImages: [
+            "/org_1.png",
+            "/org_2.png",
+            "/org_3.png",
+        ],
+        workplace: "ТОКАРНО-ФРЕЗЕРНЫЙ УЧАСТОК",
+        functions: [
+            "Токарная обработка цилиндрических, плоских и фасонных поверхностей заготовок, деталей и изделий из различных материалов"
+        ],
+    },
+    {
+        id: 5,
+        name: "Фрезеровщик",
+        slug: "frezerovshik",
+        description: "Фрезеровщик выполняет обработку металлических деталей на фрезерных станках.",
+        mainImage: "/DPK_4.png",
+        workImages: [
+            "/org_1.png",
+            "/org_2.png",
+            "/org_3.png",
+        ],
+        workplace: "ТОКАРНО-ФРЕЗЕРНЫЙ УЧАСТОК",
+        functions: [
+            "Фрезерная обработка цилиндрических, плоских и фасонных поверхностей заготовок, деталей и изделий из различных материалов"
+        ],
+    },
+    {
+        id: 6,
+        name: "Маляр",
+        slug: "malyar",
+        description: "Маляр занимается окраской поверхностей различными видами красок и покрытий.",
+        mainImage: "/DPK_6.png",
+        workImages: [
+            "/org_1.png",
+            "/org_2.png",
+            "/org_3.png",
+        ],
+        workplace: "УЧАСТОК ДЕКОРАТИВНЫХ ПОКРЫТИЙ",
+        functions: [
+            "Декоративные и защитные покрытия на поверхности художественных изделий",
+            "Изготовление изделий в технике металлопластики",
+            "Декоративное патинирование и оксидирование",
+            "Художественное чернение ювелирных изделий"
+        ],
+    },
+    {
+        id: 7,
+        name: "Электромонтер",
+        slug: "elektromonter",
+        description: "Электромонтер занимается монтажом, ремонтом и обслуживанием электрического оборудования.",
+        mainImage: "/DPK_2.png",
+        workImages: [
+            "/org_1.png",
+            "/org_2.png",
+            "/org_3.png",
+        ],
+        workplace: "РЕМОНТНАЯ ГРУППА",
+        functions: [
+            "Работы по техническому обслуживанию и ремонту оборудования",
+            "Сборка, монтаж и демонтаж узлов, механизмов и устройств"
+        ],
+    },
+    {
+        id: 8,
+        name: "Штукатур",
+        slug: "shtukatur",
+        description: "Штукатур выполняет отделочные работы, нанося штукатурные растворы на поверхности.",
+        mainImage: "/DPK_5.png",
+        workImages: [
+            "/org_1.png",
+            "/org_2.png",
+            "/org_3.png",
+        ],
+        workplace: "СТОЛЯРНЫЙ УЧАСТОК",
+        functions: [
+            "Изготовление и реставрация деревянных изделий",
+            "Механическая обработка древесины",
+            "Установка готовых элементов с их подгонкой в готовые стенды, устройства, художественные изделия"
+        ],
+    },
+    {
+        id: 9,
+        name: "Плотник",
+        slug: "plotnik",
+        description: "Плотник работает с деревом, изготавливая и монтируя деревянные конструкции.",
+        mainImage: "/DPK_5.png",
+        workImages: [
+            "/org_1.png",
+            "/org_2.png",
+            "/org_3.png",
+        ],
+        workplace: "СТОЛЯРНЫЙ УЧАСТОК",
+        functions: [
+            "Изготовление и реставрация деревянных изделий",
+            "Механическая обработка древесины",
+            "Установка готовых элементов с их подгонкой в готовые стенды, устройства, художественные изделия"
+        ],
+    },
+    {
+        id: 10,
+        name: "Каменщик",
+        slug: "kamenshik",
+        description: "Каменщик выполняет кладку стен, перегородок из кирпича и других материалов.",
+        mainImage: "/DPK_2.png",
+        workImages: [
+            "/org_1.png",
+            "/org_2.png",
+            "/org_3.png",
+        ],
+        workplace: "СТРОИТЕЛЬНЫЙ УЧАСТОК",
+        functions: [
+            "Кладка стен и перегородок из различных материалов",
+            "Строительные и отделочные работы"
+        ],
+    },
+    {
+        id: 11,
+        name: "Кровельщик",
+        slug: "krovelshik",
+        description: "Кровельщик занимается устройством и ремонтом кровель различных типов.",
+        mainImage: "/DPK_2.png",
+        workImages: [
+            "/org_1.png",
+            "/org_2.png",
+            "/org_3.png",
+        ],
+        workplace: "СТРОИТЕЛЬНЫЙ УЧАСТОК",
+        functions: [
+            "Устройство и ремонт кровель различных типов",
+            "Работы по монтажу кровельных конструкций"
+        ],
+    },
+    {
+        id: 12,
+        name: "Монтажник",
+        slug: "montazhnik",
+        description: "Монтажник выполняет сборку и установку строительных конструкций и оборудования.",
+        mainImage: "/DPK_2.png",
+        workImages: [
+            "/org_1.png",
+            "/org_2.png",
+            "/org_3.png",
+        ],
+        workplace: "РЕМОНТНАЯ ГРУППА",
+        functions: [
+            "Изготовление объектов методом 3D печати",
+            "Выполнение 3D сканирования объектов для создания 3-х мерных моделей",
+            "Поверхностная гравировка и маркировка металлических изделий на лазерном гравере"
+        ],
+    },
+];
+
+interface ProfessionContextType {
+    selectedProfession: Profession | null;
+    setSelectedProfession: (profession: Profession | null) => void;
+}
+
+const ProfessionContext = createContext<ProfessionContextType | undefined>(undefined);
+
+export const ProfessionProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [selectedProfession, setSelectedProfession] = useState<Profession | null>(null);
+
+    return (
+        <ProfessionContext.Provider value={{ selectedProfession, setSelectedProfession }}>
+            {children}
+        </ProfessionContext.Provider>
+    );
+};
+
+export const useProfession = () => {
+    const context = useContext(ProfessionContext);
+    if (context === undefined) {
+        throw new Error("useProfession must be used within a ProfessionProvider");
+    }
+    return context;
+};

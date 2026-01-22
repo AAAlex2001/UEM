@@ -1,8 +1,9 @@
 "use client";
 
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import type { EntryForm, EntryFormAction } from "./types";
 import { initialState } from "./types";
+import { useProfession, professions as allProfessions } from "@/app/context/ProfessionContext";
 
 
 function toErrorMessage(detail: unknown): string {
@@ -54,13 +55,16 @@ export function formReducer(state: EntryForm, action: EntryFormAction): EntryFor
 
 export const useFormHook = () => {
     const [state, dispatch] = useReducer(formReducer, initialState);
+    const { selectedProfession } = useProfession();
 
-    const professions = [
-        "Эмальер",
-        "Слесарь",
-        "Камнерез",
-        "Сварщик",
-    ];
+    const professions = allProfessions.map(p => p.name);
+
+    // Автоматически устанавливаем профессию из контекста
+    useEffect(() => {
+        if (selectedProfession) {
+            dispatch({ type: 'SET_PROFESSION_ID', payload: selectedProfession.id });
+        }
+    }, [selectedProfession]);
 
     const handleEntry = async (formData: EntryForm) => {
         
@@ -82,7 +86,6 @@ export const useFormHook = () => {
                 return false;
             }
 
-            // Разбиваем chat_id по запятым
             const chatIdArray = chatIds.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id));
 
             if (chatIdArray.length === 0) {
@@ -91,7 +94,6 @@ export const useFormHook = () => {
                 return false;
             }
 
-            // Отправляем в каждый чат
             const promises = chatIdArray.map(chatId => {
                 const payload = {
                     chat_id: chatId,
@@ -100,7 +102,7 @@ export const useFormHook = () => {
                     phone: formData.phone,
                     group: formData.group,
                     profession: professions[formData.professionId] || professions[0],
-                    status: "pending",
+                    status: "sent",
                     created_at: formData.date ? new Date(formData.date).toISOString() : new Date().toISOString(),
                 };
 
@@ -142,8 +144,7 @@ export const useFormHook = () => {
         date: state.date,
         error: state.error,
         loading: state.loading,
-        professions,
-        setEmail: (email: string) => dispatch({ type: 'SET_EMAIL', payload: email }),
+        professions,        selectedProfession,        setEmail: (email: string) => dispatch({ type: 'SET_EMAIL', payload: email }),
         setName: (name: string) => dispatch({ type: 'SET_NAME', payload: name }),
         setPhone: (phone: string) => dispatch({ type: 'SET_PHONE', payload: phone }),
         setGroup: (group: string) => dispatch({ type: 'SET_GROUP', payload: group }),

@@ -26,7 +26,7 @@ app.add_middleware(
 
 # Подключение роутеров
 app.include_router(student_email.router)
-app.include_router(telegram_rout.router)
+app.include_router(telegram_rout.router, prefix="/telegram", tags=["Telegram"])
 
 @app.get("/")
 async def root():

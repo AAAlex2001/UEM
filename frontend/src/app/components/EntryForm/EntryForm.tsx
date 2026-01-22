@@ -15,6 +15,7 @@ const EntryForm: React.FC = () => {
         date,
         error,
         loading,
+        professions,
         setName,
         setEmail,
         setPhone,
@@ -23,13 +24,6 @@ const EntryForm: React.FC = () => {
         setDate,
         handleEntry,
     } = useFormHook();
-
-    const professions = [
-        "Эмальер",
-        "Слесарь",
-        "Камнерез",
-        "Сварщик",
-    ];
 
     const handleSelect = (profession: string, index?: number) => {
         const id = typeof index === "number" ? index : professions.indexOf(profession);

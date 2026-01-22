@@ -55,8 +55,14 @@ export function formReducer(state: EntryForm, action: EntryFormAction): EntryFor
 export const useFormHook = () => {
     const [state, dispatch] = useReducer(formReducer, initialState);
 
+    const professions = [
+        "Эмальер",
+        "Слесарь",
+        "Камнерез",
+        "Сварщик",
+    ];
 
-    const handleEntry = (formData: EntryForm) => {
+    const handleEntry = async (formData: EntryForm) => {
         
         if (!formData.name || !formData.email || !formData.phone || !formData.group || formData.professionId === undefined || formData.professionId === null || !formData.date) {
             dispatch({ type: 'SET_ERROR', payload: 'Пожалуйста, заполните все поля.' });
@@ -64,27 +70,65 @@ export const useFormHook = () => {
         }
 
         dispatch({ type: 'SET_LOADING', payload: true });
+        dispatch({ type: 'SET_ERROR', payload: null });
 
         try {
-            const response = fetch('/api/entry', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            });
-            response.then(async res => {
-                const data = await res.json();
-                if (!res.ok) {
-                    const errorMessage = toErrorMessage(data.detail);
-                    dispatch({ type: 'SET_ERROR', payload: errorMessage });
-                } else {
-                    dispatch({ type: 'RESET_FORM' });
-                }
+            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+            const chatIds = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
+            
+            if (!chatIds) {
+                dispatch({ type: 'SET_ERROR', payload: 'Telegram Chat ID не настроен.' });
                 dispatch({ type: 'SET_LOADING', payload: false });
+                return false;
+            }
+
+            // Разбиваем chat_id по запятым
+            const chatIdArray = chatIds.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id));
+
+            if (chatIdArray.length === 0) {
+                dispatch({ type: 'SET_ERROR', payload: 'Неверный формат Chat ID.' });
+                dispatch({ type: 'SET_LOADING', payload: false });
+                return false;
+            }
+
+            // Отправляем в каждый чат
+            const promises = chatIdArray.map(chatId => {
+                const payload = {
+                    chat_id: chatId,
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone,
+                    group: formData.group,
+                    profession: professions[formData.professionId] || professions[0],
+                    status: "pending",
+                    created_at: formData.date ? new Date(formData.date).toISOString() : new Date().toISOString(),
+                };
+
+                return fetch(`${backendUrl}/telegram/send-message`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
             });
+
+            const responses = await Promise.all(promises);
+            const failedChats: number[] = [];
+
+            for (let i = 0; i < responses.length; i++) {
+                if (!responses[i].ok) {
+                    failedChats.push(chatIdArray[i]);
+                }
+            }
+
+            if (failedChats.length > 0) {
+                dispatch({ type: 'SET_ERROR', payload: `Ошибка отправки в чаты: ${failedChats.join(', ')}` });
+            } else {
+                dispatch({ type: 'SET_ERROR', payload: 'Заявка успешно отправлена!' });
+                dispatch({ type: 'RESET_FORM' });
+            }
+            dispatch({ type: 'SET_LOADING', payload: false });
         } catch (error) {
             dispatch({ type: 'SET_ERROR', payload: 'Произошла ошибка сервера.' });
-            dispatch({ type: 'SET_LOADING', payload: false });
-        } finally {
             dispatch({ type: 'SET_LOADING', payload: false });
         }
     }
@@ -98,6 +142,7 @@ export const useFormHook = () => {
         date: state.date,
         error: state.error,
         loading: state.loading,
+        professions,
         setEmail: (email: string) => dispatch({ type: 'SET_EMAIL', payload: email }),
         setName: (name: string) => dispatch({ type: 'SET_NAME', payload: name }),
         setPhone: (phone: string) => dispatch({ type: 'SET_PHONE', payload: phone }),

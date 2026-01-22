@@ -1,0 +1,63 @@
+/* EntryForm styles following the project's warm yellow visual language */
+.entryFormSection {
+	display: flex;
+	justify-content: center;
+	padding: 28px 16px;
+	background: linear-gradient(180deg, #fff 0%, #fff 40%);
+}
+
+.entryFormContainer {
+	width: 100%;
+	max-width: 560px;
+	background: #ffffff;
+	border: 2px solid #FFB800;
+	border-radius: 14px;
+	padding: 20px;
+	box-shadow: 0 10px 30px rgba(255, 184, 0, 0.08);
+}
+
+.formRow {
+	display: flex;
+	gap: 12px;
+	margin-bottom: 12px;
+}
+
+.label {
+	display: block;
+	font-size: 13px;
+	color: #1A1A1A;
+	margin-bottom: 6px;
+	font-weight: 600;
+}
+
+.input {
+	width: 100%;
+	padding: 10px 12px;
+	border-radius: 10px;
+	border: 2px solid #FFB800;
+	background: #FFF8EE;
+	color: #1A1A1A;
+	font-size: 14px;
+}
+
+.submitButton {
+	display: inline-block;
+	padding: 12px 18px;
+	background: linear-gradient(90deg, #FF8A00, #FFB800);
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: transform 0.12s ease, box-shadow 0.14s ease;
+}
+
+.submitButton:active {
+	transform: translateY(1px);
+}
+
+.formNote {
+	margin-top: 10px;
+	font-size: 13px;
+	color: #808080;
+}

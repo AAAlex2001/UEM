@@ -18,7 +18,7 @@ const MarqueeComponent = () => {
       <Marquee
         speed={50}
         gradient={true}
-        gradientColor={[255, 255, 255]}
+        gradientColor="rgb(255, 255, 255)"
         gradientWidth={100}
         pauseOnHover={true}
         className={styles.marquee}

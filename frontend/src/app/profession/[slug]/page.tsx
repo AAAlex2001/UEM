@@ -1,11 +1,9 @@
-"use client";
-
-import React, { useEffect } from "react";
+import React from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./profession.module.scss";
-import { professions, useProfession } from "@/app/context/ProfessionContext";
+import { professions } from "@/app/data/professions";
 import { ImageSwiper } from "@/app/components/ImageSwiper/ImageSwiper";
 import EntryForm from "@/app/components/EntryForm/EntryForm";
 
@@ -13,36 +11,18 @@ interface PageProps {
     params: Promise<{ slug: string }> | { slug: string };
 }
 
-export default function ProfessionPage({ params }: PageProps) {
-    const { setSelectedProfession } = useProfession();
-    const [slug, setSlug] = React.useState<string | null>(null);
+export function generateStaticParams() {
+    return professions.map((profession) => ({
+        slug: profession.slug,
+    }));
+}
 
-    useEffect(() => {
-        const getSlug = async () => {
-            const resolvedParams = await Promise.resolve(params);
-            setSlug(resolvedParams.slug);
-        };
-        getSlug();
-    }, [params]);
-
-    const profession = slug ? professions.find((p) => p.slug === slug) : null;
-
-    useEffect(() => {
-        if (profession) {
-            setSelectedProfession(profession);
-        }
-
-        return () => {
-            setSelectedProfession(null);
-        };
-    }, [profession, setSelectedProfession]);
-
-    if (slug && !profession) {
-        notFound();
-    }
+export default async function ProfessionPage({ params }: PageProps) {
+    const resolvedParams = await Promise.resolve(params);
+    const profession = professions.find((p) => p.slug === resolvedParams.slug);
 
     if (!profession) {
-        return <div>Загрузка...</div>;
+        notFound();
     }
 
     return (

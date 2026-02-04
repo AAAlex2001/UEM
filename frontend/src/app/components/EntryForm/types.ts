@@ -16,7 +16,7 @@ export type EntryFormAction =
   | { type: 'SET_GROUP'; payload: string }
   | { type: 'SET_PROFESSION_ID'; payload: number }
   | { type: 'SET_DATE'; payload: string }
-  | { type: 'SET_ERROR'; payload: string }
+  | { type: 'SET_ERROR'; payload: string | null }
   | { type: 'SET_LOADING'; payload: boolean }
   | { type: 'RESET_FORM' };
 
